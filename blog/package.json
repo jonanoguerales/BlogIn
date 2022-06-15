@@ -27,9 +27,6 @@
     "reactstrap": "^9.0.3",
     "styled-components": "^5.2.1"
   },
-  "devDependencies": {
- 
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
