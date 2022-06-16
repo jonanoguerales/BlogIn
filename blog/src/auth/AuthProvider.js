@@ -10,12 +10,9 @@ export default function AuthProvider({children}){
     const { user } = useContext(Context);
 
     const isLogged = () => !!user; //Si esta logeado me retorna true con la doble exclamacion
-    const hasRole = (role) => user?.role === role;
-    
     const contextValue = {
         user,
-        isLogged,
-        hasRole
+        isLogged
     };
     return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>;
 }
