@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 
 const Header = ({posts}) => {
-  const PF = "http://localhost:7000/images/";
+  const PF = "https://tryblogin.herokuapp.com/images/";
 
     let post = posts.map((post) => post)
      // console.log(post)

@@ -12,7 +12,7 @@ import axios from "axios";
 
 const Navbar = () => {
   const { user, dispatch } = useContext(Context);
-  const PF = "http://localhost:7000/images/";
+  const PF = "https://tryblogin.herokuapp.com/images/";
 
   const handleLogout = () => {
     dispatch({ type: "LOGOUT" });

@@ -9,11 +9,12 @@ import { faUser, faAt ,faPhone } from '@fortawesome/free-solid-svg-icons'; //El 
 const Sidebar = () => {
   const [cats, setCats] = useState([]);
   const { user, dispatch } = useContext(Context);
-  const PF = "http://localhost:7000/images/";
+  const PF = "https://tryblogin.herokuapp.com/images/";
 
   useEffect(() => {
     const getCats = async () => {
-      const res = await axios.get("/categories");
+      const res = await axios.get("http://tryblogin.herokuapp.com/api/categories");
+      console.log(res)
       setCats(res.data);
     };
     getCats();
