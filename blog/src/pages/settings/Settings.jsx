@@ -5,6 +5,7 @@ import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; //Importamos el componente para poder utilizar los iconos
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons'; //El icono o iconos a utilizar
 import Navbar from "../../components/navbar/Navbar";
+import { Navigate } from "react-router-dom";
 
 const Settings = () => {
   const [file, setFile] = useState(null);
@@ -15,11 +16,11 @@ const Settings = () => {
   const [telefono, setTelefono] = useState("");
   const [success, setSuccess] = useState(false);
   const { user, dispatch } = useContext(Context);
-  const PF = "http://localhost:7000/images/"
+  const PF = "https://servidorblog.herokuapp.com/images/"
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`/users/${user._id}`, {
+      await axios.delete(`https://servidorblog.herokuapp.com/api/users/${user._id}`, {
         data: { username: user.username },
       });
       dispatch({ type: "LOGOUT" });
@@ -44,14 +45,13 @@ const Settings = () => {
       data.append("file", file);
       updatedUser.profilePic = filename;
       try {
-        await axios.post("/upload", data);
+        await axios.post("https://servidorblog.herokuapp.com/api/upload", data);
       } catch (err) {console.log(err) }
     }
     try {
-      const res = await axios.put("/users/" + user._id, updatedUser);
+      const res = await axios.put("https://servidorblog.herokuapp.com/api/users/" + user._id, updatedUser);
       setSuccess(true);
       dispatch({ type: "UPDATE_SUCCESS", payload: res.data });
-      setInterval(window.location.reload(),1000);
     } catch (err) {
       dispatch({ type: "UPDATE_FAILURE" });
     }
@@ -94,7 +94,6 @@ const Settings = () => {
           <input
             type="text"
             placeholder={user.nombre}
-            required
             onChange={(e) => setNombre(e.target.value)}
           />
           <label>Email</label>
@@ -113,7 +112,6 @@ const Settings = () => {
            <label>Teléfono</label>
           <input
             type="text"
-            required
             placeholder={user.telefono}
             onChange={(e) => setTelefono(e.target.value)}
           />
@@ -124,7 +122,8 @@ const Settings = () => {
             <span
               style={{ color: "green", textAlign: "center", marginTop: "20px" }}
             >
-              El perfil ha sido actualizado...
+              <Navigate to={`/login`}/>
+
             </span>
           )}
         </form>
